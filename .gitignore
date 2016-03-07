@@ -1,0 +1,18 @@
+# Specific files
+app.cfg
+
+# Python files
+*.pyc
+
+# Virtual env
+env
+
+# SQLite databases
+*.s3db
+
+# Temporary files
+*~
+*.*~
+*.orig
+*.DS_Store
+*.sublime-workspace
