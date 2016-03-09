@@ -49,7 +49,9 @@ def add():
         db.session.add(rack)
         db.session.commit()
     except:
-        flash(u"Une erreur innatendue s'est produite lors de l'enregistrement du casier.<br/>Si le problème persiste, merci d'envoyer un mail à julien.seiler@gmail.com", "danger")
+        flash(u"""Une erreur innatendue s'est produite lors de l'enregistrement du casier.<br/>
+                  Si le problème persiste, merci d'envoyer un mail à julien.seiler@gmail.com""",
+              "danger")
         return render_new_rack_form(request.form)
 
     flash(u"Le casier %s a été enregistré avec succès" % rack.name, "success")
