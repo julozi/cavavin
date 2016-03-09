@@ -1,0 +1,15 @@
+JULIEN:
+  fields:
+    email: julien.seiler@gmail.com
+    password: azerty
+    firstname: Julien
+    lastname: Seiler
+  model: User
+
+GUY:
+  fields:
+    email: seiler.guyrene@gmail.com
+    password: azerty
+    firstname: Guy
+    lastname: Seiler
+  model: User

@@ -1,7 +1,7 @@
 # coding=utf-8
 
+import charlatan
 from flask.ext.script import Manager
-
 from cavavin.app import create_app, db
 
 app = create_app()
@@ -9,7 +9,7 @@ manager = Manager(app)
 
 
 @manager.command
-def create_tables(clean=False):
+def install(clean=False):
     """ Create all tables.
     Add -c or --clean if you want to remove existing tables
     """
@@ -24,6 +24,12 @@ def create_tables(clean=False):
     app.logger.info("Creating all tables...")
     import cavavin.models  # NOQA: to register all Model
     db.create_all()
+
+    # Import fixture data
+    app.logger.info("Installing default data...")
+    charlatan_manager = charlatan.FixturesManager(db_session=db.session, use_unicode=True)
+    charlatan_manager.load('data/users.yaml', models_package='cavavin.models')
+    charlatan_manager.install_all_fixtures()
 
 
 @manager.option('-m', '--methods', dest='methods_filter', default='GET,DELETE,PUT,POST')

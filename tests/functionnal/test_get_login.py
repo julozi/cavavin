@@ -16,8 +16,8 @@ class Exists(CavavinTestCase):
         db.drop_all()
 
     def test_exists(self):
-        """ GET /login exists """
-        response = self.get('/login')
+        """ GET /users/login exists """
+        response = self.get('/users/login')
         self.assertNotIn(response.status_code, [404, 500])
 
 
@@ -32,7 +32,7 @@ class Redirect(CavavinTestCase):
         db.drop_all()
 
     def test_redirect_when_already_logged_in(self):
-        """ GET /login redirect to homepage when user already logged in """
-        response = self.get('/login', user=User.query.get(1))
+        """ GET /users/login redirect to homepage when user already logged in """
+        response = self.get('/users/login', user=User.query.get(1))
         self.assertEqual(response.status_code, 302)
         self.assertEqual(urlparse(response.location).path, '/racks')

@@ -1,5 +1,6 @@
 # coding=utf-8
 
+import hashlib
 from cavavin.app import db
 
 __all__ = ['User', 'Wine', 'Bottle', 'Country', 'Region', 'Rack']
@@ -14,7 +15,15 @@ class User(db.Model):
     email = db.Column(db.Unicode, unique=True, nullable=False)
     firstname = db.Column(db.Unicode, nullable=False)
     lastname = db.Column(db.Unicode, nullable=False)
-    password = db.Column(db.Unicode, nullable=False)
+    _password = db.Column(db.Unicode, nullable=False)
+
+    def get_password(self):
+        return self._password
+
+    def set_password(self, password):
+        self._password = unicode(hashlib.md5(password).hexdigest())
+
+    password = property(get_password, set_password)
 
     def to_dict(self):
 

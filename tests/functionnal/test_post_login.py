@@ -17,8 +17,8 @@ class Exists(CavavinTestCase):
         db.drop_all()
 
     def test_exists(self):
-        """ POST /login exists """
-        response = self.post('/login')
+        """ POST /users/login exists """
+        response = self.post('/users/login')
         self.assertNotIn(response.status_code, [404, 500])
 
 
@@ -37,13 +37,13 @@ class Login(CavavinTestCase):
         db.drop_all()
 
     def test_login(self):
-        """ POST /login with valid credential """
+        """ POST /users/login with valid credential """
         with app.test_client() as client:
             data = {
                 u'email': u'test@macavavin.fr',
                 u'password': u'test'
             }
-            response = client.post('/login', data=data)
+            response = client.post('/users/login', data=data)
             self.assertEqual(response.status_code, 302)
             self.assertEqual(urlparse(response.location).path, '/racks')
             self.assertIn(u'user', flask.session)
@@ -54,7 +54,7 @@ class Login(CavavinTestCase):
                                   u'lastname': u'Doe'})
 
     def test_login_when_already_logged_in(self):
-        """ POST /login with valid credential when already logged in """
+        """ POST /users/login with valid credential when already logged in """
         with app.test_client() as client:
             with client.session_transaction() as session:
                 session['user'] = {u'id': 12,
@@ -65,7 +65,7 @@ class Login(CavavinTestCase):
                 u'email': u'test@macavavin.fr',
                 u'password': u'test'
             }
-            response = client.post('/login', data=data)
+            response = client.post('/users/login', data=data)
             self.assertEqual(response.status_code, 302)
             self.assertEqual(urlparse(response.location).path, '/racks')
             self.assertIn(u'user', flask.session)
