@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="pull-right">
+  <a class="btn btn-primary" href="{{url_for('racks.new')}}">Nouveau casier</a>
+</div>
+<h2>Mes casiers</h2>
+
+<table class="table table-condensed table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Dimension</th>
+      <th>Utilisation</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rack in racks %}
+    <tr>
+      <td>{{rack.name}}</td>
+      <td>{{rack.size}}</td>
+      <td>{{rack.bottles|length}}/{{rack.capacity}} bouteilles</td>
+      <td></td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="4" class="text-center">
+        Aucun casier<br/>
+        <a href="{{url_for('racks.new')}}">Créer un nouveau casier</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

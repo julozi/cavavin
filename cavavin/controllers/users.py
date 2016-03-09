@@ -2,6 +2,7 @@
 
 import hashlib
 from cavavin.models import User
+from cavavin.security import is_logged_in
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 
 users_bp = Blueprint('users', __name__)
@@ -28,3 +29,10 @@ def login():
 
     session['user'] = user.to_dict()
     return redirect(url_for('racks.list'))
+
+
+@users_bp.route('/logout', methods=['GET'])
+@is_logged_in()
+def logout():
+    session.pop('user')
+    return redirect(url_for('.login_form'))

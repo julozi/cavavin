@@ -2,6 +2,7 @@
 
 import hashlib
 from cavavin.app import db
+from voluptuous import All, Invalid, Coerce, Length, Range, Required, Schema
 
 __all__ = ['User', 'Wine', 'Bottle', 'Country', 'Region', 'Rack']
 
@@ -24,6 +25,9 @@ class User(db.Model):
         self._password = unicode(hashlib.md5(password).hexdigest())
 
     password = property(get_password, set_password)
+
+    def __str__(self):
+        return "%s %s" % (self.firstname, self.lastname)
 
     def to_dict(self):
 
@@ -75,7 +79,7 @@ class Bottle(db.Model):
     wine = db.relationship('Wine')
 
     rack_id = db.Column(db.Integer, db.ForeignKey('rack.id'), nullable=True)
-    rack = db.relationship('Rack')
+    rack = db.relationship('Rack', backref='bottles')
 
 
 class Country(db.Model):
@@ -107,3 +111,36 @@ class Rack(db.Model):
     name = db.Column(db.Unicode, nullable=False)
     height = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User')
+
+    @property
+    def size(self):
+        return u'%sx%s' % (self.height, self.width)
+
+    @property
+    def capacity(self):
+        return self.height * self.width
+
+    @classmethod
+    def from_dict(cls, rack_data):
+
+        def name_is_available(msg=None):
+            def f(v):
+                if Rack.query.filter_by(name=v).count() > 0:
+                    raise Invalid(msg or (u"Le nom %s est déjà utilisé" % v))
+                return v
+            return f
+
+        rack_schema = Schema({
+            Required('name'): All(Coerce(unicode), Length(min=1, msg=u"Veuillez saisir un nom pour ce casier"), name_is_available()),
+            Required('height'): All(Coerce(int, msg=u"Veuillez saisir un nombre entier"), Range(min=1, msg=u"La valeur doit être supérieur à 1")),
+            Required('width'): All(Coerce(int, msg=u"Veuillez saisir un nombre entier"), Range(min=1, msg=u"La valeur doit être supérieur à 1"))
+        })
+
+        rack_data = rack_schema(rack_data)
+
+        return Rack(name=rack_data['name'],
+                    height=rack_data['height'],
+                    width=rack_data['width'])

@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from flask import current_app, flash, redirect, request, session, url_for
+from cavavin.models import User
+from flask import current_app, flash, g, redirect, request, session, url_for
 from functools import update_wrapper
 
 
@@ -9,6 +10,7 @@ def is_logged_in(roles=[]):
         def wrapped_function(*args, **kwargs):
 
             if 'user' in session:
+                g.user = User.query.filter_by(email=session['user']['email']).first()
                 return f(*args, **kwargs)
 
             session.pop('previous_url', None)
