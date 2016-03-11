@@ -76,7 +76,7 @@ class Bottle(db.Model):
     column = db.Column(db.Integer, nullable=True)
 
     wine_id = db.Column(db.Integer, db.ForeignKey('wine.id'), nullable=False)
-    wine = db.relationship('Wine')
+    wine = db.relationship('Wine', backref='bottles')
 
     rack_id = db.Column(db.Integer, db.ForeignKey('rack.id'), nullable=True)
     rack = db.relationship('Rack', backref='bottles')

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% set active_page = "wines.list" %}
+
+{% block body %}
+
+<div class="pull-right">
+  <a class="btn btn-primary" href="#">Nouveau vin</a>
+</div>
+<h2>Mes vins</h2>
+
+<table class="table table-condensed table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Cuvée</th>
+      <th>Millésime</th>
+      <th>Catégorie</th>
+      <th>Type</th>
+      <th>Origine</th>
+      <th>En stock</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for wine in wines %}
+    <tr>
+      <td>{{wine.name}}</td>
+      <td>{{wine.cuvee}}</td>
+      <td>{{wine.vintage}}</td>
+      <td>{{wine.category}}</td>
+      <td>{{wine.type}}</td>
+      <td>{{wine.country.name}}{% if wine.region != None %}/{{wine.region.name}}{% endif %}</td>
+      <td>{% if wine.bottles %}Oui{% else %}Nom{% endif %}</td>
+      <td></td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="8" class="text-center">
+        Aucun vin<br/>
+        <a href="#">Créer un nouveau vin</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
