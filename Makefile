@@ -1,4 +1,4 @@
-NAME=project
+NAME=cavavin
 COVERDIR=cover_html
 
 ###################################################################
@@ -30,4 +30,4 @@ coverage:
 
 .PHONY : flake8
 flake8:
-	find $(NAME) -name "*.py" | xargs env/bin/flake8
+	env/bin/flake8 $(NAME)
