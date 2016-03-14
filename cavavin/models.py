@@ -2,6 +2,7 @@
 
 import hashlib
 from cavavin.app import db
+from flask import g
 from voluptuous import All, Invalid, Coerce, Length, Range, Required, Schema
 
 __all__ = ['User', 'Wine', 'Bottle', 'Country', 'Region', 'Rack']
@@ -128,7 +129,7 @@ class Rack(db.Model):
 
         def name_is_available(msg=None):
             def f(v):
-                if Rack.query.filter_by(name=v).count() > 0:
+                if Rack.query.filter_by(name=v).filter_by(user=g.user).count() > 0:
                     raise Invalid(msg or (u"Le nom %s est déjà utilisé" % v))
                 return v
             return f
