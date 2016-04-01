@@ -28,6 +28,7 @@ def install(clean=False):
     # Import fixture data
     app.logger.info("Installing default data...")
     charlatan_manager = charlatan.FixturesManager(db_session=db.session, use_unicode=True)
+    charlatan_manager.load('data/countries.yaml', models_package='cavavin.models')
     charlatan_manager.load('data/users.yaml', models_package='cavavin.models')
     charlatan_manager.install_all_fixtures()
 

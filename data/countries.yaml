@@ -1,0 +1,115 @@
+FRANCE:
+  fields:
+    name: France
+  model: Country
+
+ALSACE:
+  fields:
+    name: Alsace
+    country: !rel FRANCE
+  model: Region
+
+BEAUJOLAIS:
+  fields:
+    name: Beaujolais
+    country: !rel FRANCE
+  model: Region
+
+LYONNAIS:
+  fields:
+    name: Lyonnais
+    country: !rel FRANCE
+  model: Region
+
+BORDEAUX:
+  fields:
+    name: Bordeaux
+    country: !rel FRANCE
+  model: Region
+
+BOURGOGNE:
+  fields:
+    name: Bourgogne
+    country: !rel FRANCE
+  model: Region
+
+CHAMPAGNE:
+  fields:
+    name: Champagne
+    country: !rel FRANCE
+  model: Region
+
+CORSE:
+  fields:
+    name: Corse
+    country: !rel FRANCE
+  model: Region
+
+JURA:
+  fields:
+    name: Jura
+    country: !rel FRANCE
+  model: Region
+
+LANGUEDOC:
+  fields:
+    name: Languedoc
+    country: !rel FRANCE
+  model: Region
+
+POITOU-CHARANTES:
+  fields:
+    name: Poitou-Charantes
+    country: !rel FRANCE
+  model: Region
+
+PROVENCE:
+  fields:
+    name: Provence
+    country: !rel FRANCE
+  model: Region
+
+ROUSSILLON:
+  fields:
+    name: Roussillon
+    country: !rel FRANCE
+  model: Region
+
+SAVOIE ET BUGEY:
+  fields:
+    name: Savoie et Bugey
+    country: !rel FRANCE
+  model: Region
+
+SUD-OUEST:
+  fields:
+    name: Sud-Ouest
+    country: !rel FRANCE
+  model: Region
+
+VALLEE DE LA LOIRE:
+  fields:
+    name: Vallée de la Loire
+    country: !rel FRANCE
+  model: Region
+
+VALLEE DU RHONE:
+  fields:
+    name: Vallée du Rhône
+    country: !rel FRANCE
+  model: Region
+
+ITALIE:
+  fields:
+    name: Italie
+  model: Country
+
+ESPAGNE:
+  fields:
+    name: Espagne
+  model: Country
+
+AUTRE:
+  fields:
+    name: Autre
+  model: Country

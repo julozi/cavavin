@@ -18,6 +18,21 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- 1. Load libraries -->
+    <!-- IE required polyfills, in this exact order -->
+    <script src="{{ url_for('static', filename='node_modules/es6-shim/es6-shim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/systemjs/dist/system-polyfills.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/angular2/es6/dev/src/testing/shims_for_IE.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='node_modules/angular2/bundles/angular2-polyfills.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/systemjs/dist/system.src.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/rxjs/bundles/Rx.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/angular2/bundles/angular2.dev.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/angular2/bundles/http.dev.js') }}"></script>
+
+    {% block head %}
+    {% endblock %}
   </head>
   <body>
 

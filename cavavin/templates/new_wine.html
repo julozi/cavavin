@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block head %}
+<!-- 2. Configure SystemJS -->
+<script>
+  System.config({
+    packages: {
+      '/static/app': {
+        format: 'register',
+        defaultExtension: 'js'
+      }
+    }
+  });
+  System.import('/static/app/main')
+        .then(null, console.error.bind(console));
+</script>
+{% endblock %}
+
+{% block body %}
+
+<h2>Nouveau vin</h2>
+
+<form action="#" method="post">
+
+  <div class="form-group {% if 'name' in errors %}has-error{% endif %}">
+    <label for="name">Nom*</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Nom du vin" value="{{wine_data.name}}">
+    {% if 'name' in errors %}
+      <p class="help-block">{{errors['name']|join('<br/>')}}</p>
+    {% endif %}
+  </div>
+
+  <div class="form-group {% if 'cuvee' in errors %}has-error{% endif %}">
+    <label for="cuvee">Cuvée</label>
+    <input type="text" class="form-control" id="cuvee" name="cuvee" placeholder="Cuvée du vin" value="{{wine_data.cuvee}}">
+    {% if 'cuvee' in errors %}
+      <p class="help-block">{{errors['cuvee']|join('<br/>')}}</p>
+    {% endif %}
+  </div>
+
+  <div class="form-group {% if 'vintage' in errors %}has-error{% endif %}">
+    <label for="vintage">Millésime*</label>
+    <input type="text" class="form-control" id="vintage" name="vintage" placeholder="Millésime" value="{{wine_data.vintage}}">
+    {% if 'vintage' in errors %}
+      <p class="help-block">{{errors['vintage']|join('<br/>')}}</p>
+    {% endif %}
+  </div>
+
+  <div class="form-group {% if 'category' in errors %}has-error{% endif %}">
+    <label for="category">Catégorie*</label>
+    <select class="form-control" id="category" name="category">
+    {% for category in categories %}
+      <option value="{{category}}" {% if wine_data.category == category %}selected="selected"{% endif %}>{{category}}</option>
+    {% endfor %}
+    </select>
+    {% if 'category' in errors %}
+      <p class="help-block">{{errors['category']|join('<br/>')}}</p>
+    {% endif %}
+  </div>
+
+  <div class="form-group {% if 'type' in errors %}has-error{% endif %}">
+    <label for="type">Type*</label>
+    <select class="form-control" id="type" name="type">
+    {% for type in types %}
+      <option value="{{type}}" {% if wine_data.type == type %}selected="selected"{% endif %}>{{type}}</option>
+    {% endfor %}
+    </select>
+    {% if 'type' in errors %}
+      <p class="help-block">{{errors['type']|join('<br/>')}}</p>
+    {% endif %}
+  </div>
+
+  <location-chooser>Loading...</location-chooser>
+
+  <a href="{{url_for('wines.list')}}" class="btn btn-default">Annuler</a>
+  <button type="submit" class="btn btn-primary">Ajouter</button>
+
+</form>
+
+{% endblock %}

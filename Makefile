@@ -10,6 +10,7 @@ install4dev:
 	env/bin/pip install -r requirements.txt
 	env/bin/pip install -r requirements-dev.txt
 	cp app.development.cfg app.cfg
+	npm install
 
 .PHONY : clean
 clean:

@@ -91,6 +91,13 @@ class Country(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Unicode, nullable=False)
 
+    def to_dict(self):
+
+        return {
+            u'id': self.id,
+            u'name': self.name,
+        }
+
 
 class Region(db.Model):
 
@@ -101,6 +108,13 @@ class Region(db.Model):
 
     country_id = db.Column(db.Integer, db.ForeignKey('country.id'), nullable=False)
     country = db.relationship('Country')
+
+    def to_dict(self):
+
+        return {
+            u'id': self.id,
+            u'name': self.name,
+        }
 
 
 class Rack(db.Model):

@@ -4,7 +4,7 @@
 {% block body %}
 
 <div class="pull-right">
-  <a class="btn btn-primary" href="#">Nouveau vin</a>
+  <a class="btn btn-primary" href="{{ url_for('wines.new') }}">Nouveau vin</a>
 </div>
 <h2>Mes vins</h2>
 
@@ -37,7 +37,7 @@
     <tr>
       <td colspan="8" class="text-center">
         Aucun vin<br/>
-        <a href="#">Créer un nouveau vin</a>
+        <a href="{{ url_for('wines.new') }}">Créer un nouveau vin</a>
       </td>
     </tr>
     {% endfor %}

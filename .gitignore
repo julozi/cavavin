@@ -10,6 +10,17 @@ env
 # SQLite databases
 *.s3db
 
+# npm packages
+node_modules
+cavavin/static/node_modules
+
+# typings
+typings
+
+# Compiled JS files
+cavavin/static/app/*.js
+cavavin/static/app/*.js.map
+
 # Temporary files
 *~
 *.*~
