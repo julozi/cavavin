@@ -15,6 +15,7 @@ install4dev:
 .PHONY : clean
 clean:
 	find . -name "*.pyc" -o -name "*​.pyo" | xargs -n1 rm -f
+	find cavavin/static/app -name "*.js" -o -name "*.js.map" | xargs -n1 rm -f
 	rm -Rf build
 	rm -rf $(COVERDIR)
 	rm -Rf dist
